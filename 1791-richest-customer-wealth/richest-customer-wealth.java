@@ -4,10 +4,9 @@ class Solution {
         for(int[] nums : accounts){
             int sum = 0;
             for(int num : nums){
-                sum = sum + num;
+                sum += num;
             }
-            if(maxSum < sum)
-                maxSum = sum;
+            maxSum = Math.max(maxSum, sum);
         }
         return maxSum;
     }
