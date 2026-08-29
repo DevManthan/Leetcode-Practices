@@ -6,7 +6,7 @@ class Solution {
         for(int num : nums){
             sum += num;
         }
-
+        System.gc();
         return actualSum - sum;
     }
 }
