@@ -1,40 +1,33 @@
 class Solution {
     public int[] searchRange(int[] nums, int target) {
+        int[] result = {-1, -1};
+        result[0] = findBound(nums, target, true);
+        result[1] = findBound(nums, target, false);
+        return result;
+    }
+    
+    private int findBound(int[] nums, int target, boolean isFirst) {
         int start = 0;
         int end = nums.length - 1;
-        int leftAns = -1;
-        int rightAns = -1;
-
-        // Loop 1: Find the first (leftmost) occurrence
+        int bound = -1;
+        
         while (start <= end) {
-            int mid1 = start + (end - start) / 2;
-            if (nums[mid1] < target) {
-                start = mid1 + 1;
-            } else if (nums[mid1] > target) {
-                end = mid1 - 1;
+            int mid = start + (end - start) / 2;
+            
+            if (nums[mid] == target) {
+                bound = mid;
+                if (isFirst) {
+                    end = mid - 1; // Search left for the first occurrence
+                } else {
+                    start = mid + 1; // Search right for the last occurrence
+                }
+            } else if (nums[mid] < target) {
+                start = mid + 1;
             } else {
-                leftAns = mid1;  // Record the potential answer
-                end = mid1 - 1;  // Keep looking left
+                end = mid - 1;
             }
         }
-
-        // Reset pointers for the second search
-        start = 0;
-        end = nums.length - 1;
-
-        // Loop 2: Find the last (rightmost) occurrence
-        while (start <= end) {
-            int mid2 = start + (end - start) / 2;
-            if (nums[mid2] < target) {
-                start = mid2 + 1;
-            } else if (nums[mid2] > target) {
-                end = mid2 - 1;
-            } else {
-                rightAns = mid2; // Record the potential answer
-                start = mid2 + 1; // Keep looking right
-            }
-        }
-
-        return new int[]{leftAns, rightAns};
+        
+        return bound;
     }
 }
