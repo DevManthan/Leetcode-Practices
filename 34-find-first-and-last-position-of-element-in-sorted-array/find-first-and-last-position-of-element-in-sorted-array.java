@@ -1,9 +1,14 @@
 class Solution {
     public int[] searchRange(int[] nums, int target) {
-        int[] result = {-1, -1};
-        result[0] = findBound(nums, target, true);
-        result[1] = findBound(nums, target, false);
-        return result;
+        int first = findBound(nums, target, true);
+        
+        // If the element doesn't exist, don't run the second binary search
+        if (first == -1) {
+            return new int[]{-1, -1};
+        }
+        
+        int last = findBound(nums, target, false);
+        return new int[]{first, last};
     }
     
     private int findBound(int[] nums, int target, boolean isFirst) {
@@ -17,9 +22,9 @@ class Solution {
             if (nums[mid] == target) {
                 bound = mid;
                 if (isFirst) {
-                    end = mid - 1; // Search left for the first occurrence
+                    end = mid - 1;
                 } else {
-                    start = mid + 1; // Search right for the last occurrence
+                    start = mid + 1;
                 }
             } else if (nums[mid] < target) {
                 start = mid + 1;
@@ -27,7 +32,6 @@ class Solution {
                 end = mid - 1;
             }
         }
-        
         return bound;
     }
 }
