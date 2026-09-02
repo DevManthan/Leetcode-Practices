@@ -12,12 +12,10 @@ class Solution {
 
         int peak = findPeak(mountainArr);
         int index1 = BinarySearch(mountainArr, target, 0, peak, true);
-        int index2 = BinarySearch(mountainArr, target, peak, mountainArr.length() - 1, false);
-
         if (index1 != -1) {
             return index1;
         }
-        return index2;
+        return  BinarySearch(mountainArr, target, peak, mountainArr.length() - 1, false);
     }
 
     public int findPeak(MountainArray arr) {
