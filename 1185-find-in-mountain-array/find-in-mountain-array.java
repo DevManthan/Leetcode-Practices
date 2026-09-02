@@ -11,7 +11,7 @@ class Solution {
     public int findInMountainArray(int target, MountainArray mountainArr) {
 
         int peak = findPeak(mountainArr);
-        int index1 = BinarySearch(mountainArr, target, 0, peak, true);
+        int index1 = BinarySearch(mountainArr, target, 0, peak+1, true);
         if (index1 != -1) {
             return index1;
         }
