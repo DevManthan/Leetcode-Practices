@@ -40,17 +40,17 @@ class Solution {
         int mid = 0;
         while (start <= end) {
             mid = start + (end - start) / 2;
-
-            if (arr.get(mid) == target) {
+            int midVal = arr.get(mid);
+            if (midVal == target) {
                 return mid;
             }
             if (isAsc) {
-                if (arr.get(mid) > target)
+                if (midVal > target)
                     end = mid - 1;
                 else
                     start = mid + 1;
             } else {
-                if (arr.get(mid) < target)
+                if (midVal < target)
                     end = mid - 1;
                 else
                     start = mid + 1;
