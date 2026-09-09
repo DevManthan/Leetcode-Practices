@@ -4,11 +4,7 @@ class Solution(object):
         :type sentence: str
         :rtype: bool
         """
-        flag = True
-        st = "abcdefghijklmnopqrstuvwxyz"
+        if set(sentence) == set("abcdefghijklmnopqrstuvwxyz"):
+            return True
 
-        for ch in st:
-            if ch not in sentence:
-                flag = False
-        
-        return flag
+        return False
