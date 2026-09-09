@@ -4,14 +4,12 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        count = {}
-        totalCount = 0
+        count={}
+        good_pairs=0
         for num in nums:
             if num in count:
-                totalCount += count[num]
-                count[num] += 1
+                good_pairs+=count[num]
+                count[num]+=1
             else:
-                count[num] = 1
-
-
-        return totalCount
+                count[num]=1
+        return good_pairs        
