@@ -3,10 +3,9 @@ class Solution {
         int index = ruleKey.equals("type") ? 0 : (ruleKey.equals("color") ? 1 : 2);
         int count = 0;
 
-        for (int j = 0; j < items.size(); j++) {
-            if (items.get(j).get(index).equals(ruleValue)) {
+        for (List<String> item : items) {
+            if (item.get(index).equals(ruleValue)) {
                 count++;
-
             }
         }
         return count;
