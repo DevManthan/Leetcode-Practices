@@ -12,14 +12,14 @@ class Solution {
             }
             
             // The last digit of k is the value for the current position
-            result.add(0,k % 10);
+            result.add(k % 10);
             
             // Divide k by 10 to carry over the remaining value to the next position
             k /= 10;
         }
 
         // Since we added digits from right to left, reverse the list to get the correct order
-        // Collections.reverse(result);
+        Collections.reverse(result);
         return result;
     }
 }
