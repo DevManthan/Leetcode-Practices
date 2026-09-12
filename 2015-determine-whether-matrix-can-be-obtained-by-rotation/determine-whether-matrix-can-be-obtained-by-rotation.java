@@ -1,38 +1,37 @@
 class Solution {
     public boolean findRotation(int[][] mat, int[][] target) {
-        // Check 4 times (0, 90, 180, and 270 degrees)
-        for (int i = 0; i < 4; i++) {
-            if (Arrays.deepEquals(mat, target)) {
-                return true;
-            }
-            // Rotate 90 degrees clockwise in-place
-            rotate90Clockwise(mat);
-        }
-        return false;
-    }
-
-    private void rotate90Clockwise(int[][] mat) {
         int n = mat.length;
-
-        // Step 1: Transpose the matrix
+        
+        // Flags to track if the rotation is still valid
+        boolean rot0 = true;
+        boolean rot90 = true;
+        boolean rot180 = true;
+        boolean rot270 = true;
+        
         for (int i = 0; i < n; i++) {
-            for (int j = i + 1; j < n; j++) {
-                int temp = mat[i][j];
-                mat[i][j] = mat[j][i];
-                mat[j][i] = temp;
+            for (int j = 0; j < n; j++) {
+                int val = mat[i][j];
+                
+                // Check 0 degrees
+                if (val != target[i][j]) rot0 = false;
+                
+                // Check 90 degrees clockwise
+                if (val != target[j][n - 1 - i]) rot90 = false;
+                
+                // Check 180 degrees
+                if (val != target[n - 1 - i][n - 1 - j]) rot180 = false;
+                
+                // Check 270 degrees clockwise
+                if (val != target[n - 1 - j][i]) rot270 = false;
+                
+                // Early exit: if all rotations become invalid, stop checking immediately
+                if (!rot0 && !rot90 && !rot180 && !rot270) {
+                    return false;
+                }
             }
         }
-
-        // Step 2: Reverse each row
-        for (int i = 0; i < n; i++) {
-            int start = 0, end = n - 1;
-            while (start < end) {
-                int temp = mat[i][start];
-                mat[i][start] = mat[i][end];
-                mat[i][end] = temp;
-                start++;
-                end--;
-            }
-        }
+        
+        // If at least one rotation holds true for the entire matrix, return true
+        return rot0 || rot90 || rot180 || rot270;
     }
 }
