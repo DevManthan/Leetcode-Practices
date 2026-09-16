@@ -1,19 +1,8 @@
 class Solution(object):
     def twoSum(self, numbers, target):
-        """
-        :type numbers: List[int]
-        :type target: int
-        :rtype: List[int]
-        """
-        left = 0
-        right = len(numbers)-1
-
-        while left < right:
-            current = numbers[left] + numbers[right]
-
-            if current == target:
-                return [left+1, right+1]
-            elif current < target:
-                left +=1
-            else:
-                right -=1
+        seen={} # {number:index}
+        for i,num in enumerate(numbers):
+            complement=target-num  
+            if complement in seen:
+                return [seen[complement]+1,i+1]
+            seen[num]=i
