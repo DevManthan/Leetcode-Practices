@@ -4,13 +4,13 @@ class Solution(object):
         :type arr: List[int]
         :rtype: bool
         """
-        seen = {}
-        for index, a in enumerate(arr):
-            if (a*2 in seen) or (a%2 == 0 and a/2 in seen):
+        seen = set()
+        for num in arr:
+            if num*2 in seen or not num%2 and num//2 in seen:
                 return True
-                
-            seen[a] = index
+            seen.add(num)
 
         return False
+
         
         
